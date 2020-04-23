@@ -1,4 +1,4 @@
-# this is all of ETL_DB to split the customers csv into first name, last name and age and add to the person table on SQL!
+# this is all of ETL to split the customers csv into first name, last name and age and add to the person table on SQL!
 
 import pymysql
 from os import environ
