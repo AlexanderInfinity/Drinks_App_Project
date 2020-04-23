@@ -19,3 +19,10 @@ class Person:
         self.last_name = last_name
         self.age = age
         self.person_id = person_id
+
+    def get_person_info(self):
+        if self.person_id != None:
+            person_string = f"Name: {self.first_name} {self.last_name} Age: {self.age} ID: Set"
+        else:
+            person_string = f"Name: {self.first_name} {self.last_name} Age: {self.age} ID: None"
+        return(person_string)
