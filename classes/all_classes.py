@@ -11,7 +11,6 @@ class Round:
         self.brewer = brewer
         self.person_id = person_id
         self.drink = drink_id
-        self.orders = {}
 
 class Person:
     def __init__(self, first_name, last_name, age, person_id=None):
