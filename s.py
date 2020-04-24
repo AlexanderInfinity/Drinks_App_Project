@@ -2,6 +2,9 @@ import menus.artwork as art
 from persistence.database import Database
 from persistence.database import db_drinks_save_list, db_people_save_list
 import os
+from classes.all_classes import Drink, Person
+
+
 
 class App():
 
@@ -10,7 +13,7 @@ class App():
         self.csv = csv
 
     def show_menu_and_get_selection(self):
-       art.art()
+       # art.art()
        os.system('clear')
        menu_text = """\n                                           Welcome to Alex Brewᵀᴹ
     
@@ -66,11 +69,10 @@ class App():
         self.selection_1a()
 
     def selection_1b(self): # print entire people list
-        print(f"ID | FIRSTNAME | LASTNAME | AGE")
+        print(f"ID, FIRSTNAME, LASTNAME , AGE")
         for person in db_people_save_list:
             print(f"{person.person_id} {person.first_name} {person.last_name} {person.age}")
         self.selection_1()
-
 
     def selection_2(self):
         self.db.load_drinks()
@@ -94,31 +96,56 @@ class App():
         self.selection_2()
 
     def selection_2b(self): # all drinks
-        print(f"\nDRINK | SUGAR FREE | CATEGORY | EXTRA")
+        print(f"\nDRINK, SUGAR FREE/REDUCED, CATEGORY")
         for drink in db_drinks_save_list:
-            if drink.sugar_free == 1:
-                sugar_free = "Sugar Free"
-            else:
-                sugar_free = "Full Fat"
-            print(f"{drink.drink_name}, {sugar_free}, {drink.cat}, {drink.id}\n")
+            print(f"{drink.drink_name}, {drink.sugar_free}, {drink.cat}, {drink.id}")
         self.selection_2()
 
     def selection_3(self):
+        selection2 = input("Please enter their firstname:\n(Ex)it\n")
+        if selection2.lower() == "ex":
+            self.main_menu()
+        selection3 = input("Please enter their lastname:\n")
+        selection4 = input("Please enter their age:\n")
+        new_person = Person(selection2, selection3, selection4)
+        self.selection_3a(new_person)
+        return (new_person)
+
+    def selection_3a(self, new_person):
         try:
-            self.db.add_person_to_db()
-            self.main_menu()
+            self.db.add_person_to_db(new_person)
+            self.selection_3()
         except Exception as error:
-            print(f"Duplicate entry!\n Technical things: {error}")
-            self.main_menu()
-            print(f"Duplicate entry!\n Technical things: {error}")
+            print(f"Duplicate entry!\nTechnical things: {error}")
+            self.selection_3()
 
     def selection_4(self):
+        selection2 = input("Please enter the drink name:\n(Ex)it\n")
+        if selection2.lower() == "ex":
+            self.main_menu()
+        selection4 = input("Is the drink sugar free or reduced sugar?:\n(Y)es\n(N)o\n")
+        if selection4.lower() == "y":
+            selection4 = 0
+        else:
+            selection4 = 1
+        selection5 = input("Please enter the drink catergory:\n(A)lcoholic\n(S)oft Drink\n(H)ot Drink\n")
+        if selection5.lower() == "a":
+            selection5 = "Alcoholic"
+        elif selection5.lower() == "s":
+            selection5 = "Soft Drink"
+        else:
+            selection5 = "Hot Drink"
+        new_drink = Drink(selection2, selection4, selection5)
+        self.selection_4a(new_drink)
+        return(new_drink)
+
+    def selection_4a(self, drink_object):
         try:
-            self.db.add_drink_to_db()
+            self.db.add_drink_to_db(drink_object)
+            self.selection_4()
         except Exception as error:
             print(f"Duplicate entry!\n Technical things: {error}")
-            self.main_menu()
-        self.main_menu()
+            self.selection_4()
 
     def selection_5(self):
         self.db.load_person()
@@ -143,6 +170,8 @@ class App():
         print("The following entries were deleted:")
         for person in people_to_delete:
             print(f"{person.first_name} {person.last_name}")
+        self.selection_5()
+        return(people_to_delete)
 
     def selection_6(self):
         self.db.load_drinks()
@@ -166,7 +195,9 @@ class App():
         print("The following entries were deleted:")
         for drink in drinks_to_delete:
             print(f"{drink.drink_name} was deleted!")
-        self.main_menu()
+        self.selection_6()
+        return (drinks_to_delete)
+
 
 if __name__ == '__main__':
 
