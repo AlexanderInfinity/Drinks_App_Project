@@ -7,7 +7,7 @@ class Drink:
         self.id = id
 
 class Round:
-    def __init__(self, brewer, person_id=None, drink_id=None):
+    def __init__(self, brewer, person_id=[], drink_id=[]):
         self.brewer = brewer
         self.person_id = person_id
         self.drink = drink_id
