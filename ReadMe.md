@@ -1,21 +1,36 @@
-#WELCOME TO IBrew v1.0!
+#WELCOME TO AlexBrew v1.0!
 
-####IBrew is an app designed to streamline name and drink storage and round ordering.
+##Welcome
+
+AlexBrew is an app designed to streamline name and drink storage and allows the production of new and persistence of historic rounds.
 
 Built and tested on Python 3.7.
 
+##Setup
+
 Requirements: <br/>
-PyMySQL==0.9.3 <br/>
-coverage==5.1 <br/>
-Please see the requirements.txt and install via pip3 install -r requirements.txt. <br/> The cover.sh bash script generates the coverage reports! To use: <br/> 
-1) Giver permissions via chmod +x cover.sh <br/>
-2) Run from command line ./coverage.sh <br/>
+>PyMySQL==0.9.3 <br/>
+>coverage==5.1 <br/>
+
+Please see the requirements.txt and install via:
+>pip3 install -r requirements.txt. 
+
+The cover.sh bash script generates the coverage reports! To use:  
+
+>1) Giver permissions via chmod +x cover.sh <br/>
+>2) Run from command line ./coverage.sh <br/>
+
+##Contribute
 
 
+AlexBrew is an open source project! 
+If you wish to contribute to this open source project, the git repository can be cloned at: <br/> 
+>git@github.com:AlexanderInfinity/project.git<br/> 
 
+Please get in touch with feedback, bug reporting and project development via: 
+>Alex.Wallwork@AlexBrew.com
 
-If you wish to contribute, the git repository can be cloned at: <br/> git@github.com:AlexanderInfinity/project.git<br/> 
-IBrew is an open source project! Please get in touch with feedback, bug reporting and project development via: Alex.Wallwork@fake.email.com
+##Manual 
  
 
 
@@ -46,11 +61,11 @@ IBrew is an open source project! Please get in touch with feedback, bug reportin
 [6] Delete drink and their unique ID from the database
 
 [7] Allows you to generate a round recording a brewer, drinkers and their respective drinks! <br/>
-&nbsp;&nbsp;&nbsp;The round can be saved in a CSV format of: <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Brewer Name" "Round Date" "Round Unique ID" <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Drinker1" "Drinker1_Drink" <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Drinker2" "Drinker2_Drink"           
-&nbsp;&nbsp;&nbsp;Or Directly to the database!
+    The round can be saved into a database or as a CSV of format: <br/>
+    
+        "Brewer Name" "Round Date" "Round Unique ID" <br/>
+        "Drinker1" "Drinker1_Drink" <br/>
+        "Drinker2" "Drinker2_Drink"           
 
 [8] Returns all stored drinks or allows you to search. 
 

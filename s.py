@@ -15,7 +15,7 @@ class App():
 
     def show_menu_and_get_selection(self):
        os.system('clear')
-       menu_text = """\n                                           Welcome to Alex Brewᵀᴹ
+       menu_text = """\n                                           Welcome to AlexBrewᵀᴹ
     
                             Please, select an option below by entering a number:
                             
@@ -25,7 +25,7 @@ class App():
                             [4] Add drink to database 
                             [5] Delete person from database
                             [6] Delete drink from database
-                            [7] Round Creater
+                            [7] Round Creatorᵀᴹ
                             [8] Get all or search rounds 
                             [Ex] Exit
         """
@@ -50,7 +50,7 @@ class App():
             self.selection_7c_round_builder()
         elif selection == "8":
             self.selection_8_input()
-        elif selection == "Ex":
+        elif selection.lower() == "ex":
             exit()
 
     def selection_1c(self):
@@ -83,6 +83,8 @@ class App():
             elif selection1b == person.last_name + " " + str(person.age):
                 print(f"{person.first_name} {person.last_name} {person.age}")
             elif selection1b == str(person.age):
+                print(f"{person.first_name} {person.last_name} {person.age}")
+            elif selection1b == person.first_name + " " + person.last_name + " " + str(person.age):
                 print(f"{person.first_name} {person.last_name} {person.age}")
             elif selection1b == "Ex":
                 self.main_menu()
@@ -146,10 +148,10 @@ class App():
                 drink.sugar_free = "Reduced/No Sugar"
             else:
                 drink.sugar_free = "Full Sugar"
-            print(f"{drink.drink_name}, {drink.sugar_free}, {drink.cat}, {drink.id}")
+            print(f"{drink.drink_name}, {drink.sugar_free}, {drink.cat}")
         print(f"")
         self.selection_2c()
-        return(f"{drink.drink_name}, {drink.sugar_free}, {drink.cat}, {drink.id}")
+        return(f"{drink.drink_name}, {drink.sugar_free}, {drink.cat}")
         self.selection_2c()
 
     def selection_3(self):
@@ -173,7 +175,7 @@ class App():
             self.db.add_person_to_db(new_person)
             self.selection_3()
         except Exception as error:
-            print(f"Duplicate entry!Technical things: {error}")
+            print(f"Duplicate entry! Technical things: {error}")
         self.selection_3()
 
     def selection_4(self, selection2, selection4, selection5):
@@ -208,7 +210,7 @@ class App():
             self.db.add_drink_to_db(drink_object)
             self.selection_4b_drink_input_getter()
         except Exception as error:
-            print(f"Duplicate entry!\nTechnical things: {error}")
+            print(f"Duplicate entry! Technical things: {error}")
         self.selection_4b_drink_input_getter()
 
     def selection_5(self):
@@ -281,7 +283,7 @@ class App():
         found_person = None
         people_list = self.db.load_person()
         while found_person == None:
-            selection1 = input("Please enter the brewer's first name:\n(Ex)\n").capitalize()
+            selection1 = input("Please enter the brewer's first name:\n(Ex)it\n").capitalize()
             if selection1 == "Ex":
                 self.main_menu()
             selection2 = input("Please enter the brewer's last name:\n").capitalize()
@@ -297,10 +299,10 @@ class App():
         found_person = None
         people_list = self.db.load_person()
         while found_person == None:
-            selection1 = input("Please enter the drinker's first name\n(Ex)it\n").capitalize()
-            if selection1 == "ex":
-                self.main.menu()
-            selection2 = input("Please enter the drinkers last name\n").capitalize().strip()
+            selection1 = input("Please enter the drinker's first name:\n(Ex)it\n").capitalize()
+            if selection1 == "Ex":
+                self.main_menu()
+            selection2 = input("Please enter the drinkers last name:\n").capitalize().strip()
             for person in people_list:
                 if selection1 == person.first_name and selection2 == person.last_name:
                     found_person = person
@@ -312,9 +314,9 @@ class App():
         found_drink = None
         drink_list = self.db.load_drinks()
         while found_drink == None:
-            selection1 = input("Please enter the drink\n(Ex)it\n").title().strip()
-            if selection1 == "ex":
-                self.main.menu()
+            selection1 = input("Please enter the drink:\n(Ex)it\n").title().strip()
+            if selection1 == "Ex":
+                self.main_menu()
             for drink in drink_list:
                 if selection1 == drink.drink_name:
                     found_drink = drink
@@ -346,12 +348,12 @@ class App():
             drink = self.selection_7b_get_drink_id()
             round_list.append((drinker, drink))
             csv_round_list.append((drinker.first_name, drinker.last_name, drink.drink_name))
-            selection = input("would you like to add a drinker and drink?\n(Y)es\n(N)o\n").lower()
-        selection = input("Would you like generate a CSV?\n(Y)es\n(N)o\n").lower()
+            selection = input("would you like to add a drinker and drink?:\n(Y)es\n(N)o\n").lower()
+        selection = input("Would you like generate a CSV?:\n(Y)es\n(N)o\n").lower()
         if selection == 'y':
             filename = f"{person.first_name} {date} {ID}"
             self.save_round_csv(csv_brewer_info, csv_round_list, filename)
-        selection = input("Would you like to save to database?\n(Y)es\n(N)o\n").lower()
+        selection = input("Would you like to save to database?:\n(Y)es\n(N)o\n").lower()
         if selection == 'y':
             self.save_round_to_db(brewer_info, round_list)
         print(f"Build again or exit!")
@@ -399,7 +401,7 @@ class App():
 
     def selection_8_input_search(self):
         raw_round_list = self.db.all_round()
-        selection1 = input("Please enter the name of the brewer, drinker, date of creation (YY-MM-DD) or unique round ID:\n(Ex)it\n").title()
+        selection1 = input("Please enter the name of the brewer, drinker, date of creation or unique round ID:\n(Ex)it\n").title()
         if selection1 == 'Ex':
             self.main_menu()
         print(f"+==================================================+")
